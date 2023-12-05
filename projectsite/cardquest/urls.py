@@ -22,8 +22,6 @@ Including another URLconf
 # ]
 
 
-
-
 from django.urls import path
 from cardquest.views import HomePageView, TrainerList
 from cardquest import views
