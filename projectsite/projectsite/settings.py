@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-h!@v0gztum$*2(!d=&2c5%kr^%n*)46tqflh&*o-^y-g97pp=3
 DEBUG = True
 
 ALLOWED_HOSTS = ['cardquest.pythonanywhere.com', '127.0.0.1']
-ALLOWED_HOSTS = ['djcardquest.pythonanywhere.com', '127.0.0.1'],
+ALLOWED_HOSTS = ['djcardquest.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
