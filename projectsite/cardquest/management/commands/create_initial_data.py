@@ -51,8 +51,8 @@ class Command(BaseCommand):
         card13 = PokemonCard(name="Mudkip", rarity="Common", hp=50, card_type="Water", attack="Watergun",
                              description="A small, ammphibious, quadrupedal Pokemon.",
                              weakness="Electric", card_number=258, release_date="2001-03-19", evolution_stage="Basic", abilities="Torrent")
-        card14 = PokemonCard(name="Meowth", rarity="Rare", hp=40, card_type="Normmal", attack="Fake out",
-                             description=" A small, feline Pokemon with creamm0colored fur that turns brown at the tips of its hind paws and tail.",
+        card14 = PokemonCard(name="Meowth", rarity="Rare", hp=40, card_type="Normal", attack="Fake out",
+                             description="A small, feline Pokemon with cream-colored fur that turns brown at the tips of its hind paws and tail.",
                              weakness="Fighting", card_number=52, release_date="1996-02-27", evolution_stage="Basic", abilities="Pickup")
         card15 = PokemonCard(name="Jigglypuf", rarity="Rare", hp=115, card_type="Fairy", attack="Disarming Voice",
                              description="A pink pokemon with a spherical body",
@@ -76,8 +76,9 @@ class Command(BaseCommand):
 
         # Save instances to database
         # card2.save()
+        # 
         pokemon_cards = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
-                         card11, card12, card13, card14, card15, card16, card17, card18, card19, card20]
+                       card11, card12, card13, card14, card15, card16, card17, card18, card19, card20]
         for card in pokemon_cards:
             card.save()
 
@@ -110,6 +111,7 @@ class Command(BaseCommand):
 
         trainers = [trainer1, trainer2, trainer3, trainer4, trainer5,
                     trainer6, trainer7, trainer8, trainer9, trainer10]
+
 
         for trainer in trainers:
             trainer.save()
