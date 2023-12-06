@@ -72,6 +72,7 @@ class Command(BaseCommand):
         card20 = PokemonCard(name="Deoxys", rarity="Rare", hp=50, card_type="Pyschic", attack="Cosmic Power",
                              description="An alien-like, bipedal Pokemon that has four forms. Each focused on a different stat.",
                              weakness="Dark", card_number=186, release_date="2004-11-18", evolution_stage="Basic", abilities="Pressure")
+        
 
         # Save instances to database
         # card2.save()
