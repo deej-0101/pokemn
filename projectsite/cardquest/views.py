@@ -14,7 +14,7 @@ from django.views import View
 
 class CollectionList(ListView):
     model = Collection
-    context_object_name = 'collection'
+    context_object_name = 'collections'
     template_name = 'collection.html'
     paginate_by = 5
 
