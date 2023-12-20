@@ -1,6 +1,16 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from cardquest.models import PokemonCard, Trainer, Collection
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic.edit import DeleteView, UpdateView, CreateView
+from django.urls import reverse_lazy
+import json
+from cardquest.forms import TrainerForm
+from .models import Trainer
+from projectsite.forms import TrainerForm, PokemonCardForm  
+from projectsite.forms import TrainerAddForm, PokemonAddForm
+from django.views import View
+
 
 class CollectionList(ListView):
     model = Collection
@@ -16,19 +26,27 @@ class CollectionList(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
-class PokemonCardList(ListView):
+class PokemonCardListView(ListView):
     model = PokemonCard
-    context_object_name = 'pokemon_cards'
-    template_name = 'pokemon_cards.html'
-    paginate_by = 5
+    context_object_name = 'pokemoncard'
+    template_name = 'pokemoncards.html'
+    # paginate_by = 5
+    json_file_path = 'data/pokemon_data.json'
 
-    def get_queryset(self, *args, **kwargs):
-        qs = super(PokemonCardList, self).get_queryset(*args, **kwargs)
-        return qs
+    # def get_queryset(self, *args, **kwargs):
+    #     qs = super(PokemonCardList, self).get_queryset(*args, **kwargs)
+    #     return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        pokemon_data = self.get_pokemon_data()
+        context['pokemon_data'] = pokemon_data
         return context
+    
+    def get_pokemon_data(self):
+        with open(self.json_file_path, 'r') as file:
+            data = json.load(file)
+            return data.get('pokemons', [])
 
 
 class HomePageView(ListView):
@@ -59,15 +77,8 @@ class TrainerList(ListView):
 # trainers/views.py
 
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic.edit import DeleteView, UpdateView
-from django.urls import reverse_lazy
-from .models import Trainer
-from projectsite.forms import TrainerForm, PokemonCardForm  # Import the form you use for editing
-from projectsite.forms import TrainerAddForm, PokemonAddForm
-from django.views import View
-
-class TrainerAddView(View):
+# dupe
+class TrainerAddView(CreateView):
     template_name = 'add_trainer.html'
 
     def get(self, request):
@@ -99,7 +110,12 @@ class TrainerDeleteView(DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-    
+
+class TrainerCreateView(CreateView):
+    model = Trainer
+    form_class = TrainerForm
+    template_name = 'trainer_del.html'
+    success_url = reverse_lazy('trainer-list')
 
 
 class PokemonUpdateView(UpdateView):

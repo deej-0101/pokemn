@@ -14,21 +14,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.contrib import admin
-# from django.urls import path
-
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-# ]
-
-
-from django.urls import path
-from cardquest.views import HomePageView, TrainerList
-from cardquest import views
 from django.contrib import admin
+from django.urls import path
+from cardquest.views import HomePageView, TrainerList, TrainerDeleteView, TrainerUpdateView, TrainerAddView, PokemonCardListView, PokemonUpdateView, PokemonDeleteView, PokemonAddView, CollectionList
+from cardquest import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.HomePageView.as_view(), name='home'),
-    path('trainer_list', TrainerList.as_view(), name='tainer-list')
+    path('', views.HomePageView.as_view(), name='home'),                    
+    path('trainer_list', TrainerList.as_view(), name='trainer-list'),
+    path('edit_trainer/<int:pk>/', TrainerUpdateView.as_view(), name='edit_trainer'),
+    path('delete_trainer/<int:pk>/', TrainerDeleteView.as_view(), name='delete_trainer'),
+    path('add_trainer/', TrainerAddView.as_view(), name='add_trainer'),
+    path('pokemoncard-list', PokemonCardListView.as_view(), name='pokemoncard-list'),
+    path('edit_pokemon/<int:pk>/', PokemonUpdateView.as_view(), name='edit_pokemon'),
+    path('delete_pokemon/<int:pk>/', PokemonDeleteView.as_view(), name='delete_pokemon'),
+    path('add_pokemon/', PokemonAddView.as_view(), name='add_pokemon'),
+    path('collections/', CollectionList.as_view(), name='collection-list'),
 ]
+
