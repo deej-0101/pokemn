@@ -17,6 +17,7 @@ class CollectionList(ListView):
     context_object_name = 'collections'
     template_name = 'collection.html'
     paginate_by = 5
+    ordering = ['trainer']
 
     def get_queryset(self, *args, **kwargs):
         qs = super(CollectionList, self).get_queryset(*args, **kwargs)
@@ -33,9 +34,9 @@ class PokemonCardListView(ListView):
     # paginate_by = 5
     json_file_path = 'data/pokemon_data.json'
 
-    # def get_queryset(self, *args, **kwargs):
-    #     qs = super(PokemonCardList, self).get_queryset(*args, **kwargs)
-    #     return qs
+    def get_queryset(self, *args, **kwargs):
+        qs = super(PokemonCardListView, self).get_queryset(*args, **kwargs)
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -64,6 +65,7 @@ class TrainerList(ListView):
     context_object_name = 'trainer'
     template_name = 'trainers.html'
     paginate_by = 5
+    ordering = ['name']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,8 +75,6 @@ class TrainerList(ListView):
         qs = super(TrainerList, self).get_queryset(*args, **kwargs)
         return qs
 
-
-# trainers/views.py
 
 
 # dupe
