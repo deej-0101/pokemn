@@ -122,7 +122,7 @@ class PokemonUpdateView(UpdateView):
     model = PokemonCard
     form_class = PokemonCardForm
     template_name = 'edit_pokemon.html'
-    success_url = reverse_lazy('pokemon-card-list')  # Redirect to the trainer list after editing
+    success_url = reverse_lazy('pokemoncard-list')  # Redirect to the trainer list after editing
 
     def form_valid(self, form):
         # Additional logic if needed before saving the form
@@ -132,12 +132,12 @@ class PokemonUpdateView(UpdateView):
 class PokemonDeleteView(DeleteView):
     model = PokemonCard
     template_name = 'delete_pokemon.html'
-    success_url = reverse_lazy('pokemon-card-list')  # Redirect to the trainer list after deletion
+    success_url = reverse_lazy('pokemoncard-list')  # Redirect to the trainer list after deletion
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
     
-class PokemonAddView(View):
+class PokemonAddView(CreateView):
     template_name = 'add_pokemon.html'
 
     def get(self, request):
@@ -148,5 +148,5 @@ class PokemonAddView(View):
         form = PokemonAddForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('pokemon-card-list') 
+            return redirect('pokemoncard-list') 
         return render(request, self.template_name, {'form': form})

@@ -3,6 +3,11 @@
 
 {% block content %}
   <!-- POKEMON CARDS -->
+  <div style="text-align: center; padding-bottom: 30px;">
+    <a href="{% url 'add_pokemon' %}">Add Pokemon</a> |
+    <a href="{% url 'edit_pokemon' object.id %}">Edit</a> |
+    <a href="pokemoncard_list/{{ object.id }}/delete" >Delete</a>
+  </div>
   <section class="cards-container">
     {% for card in pokemon_cards %}
       <div class="card-box">
@@ -64,4 +69,5 @@
       </div>
     {% endfor %}
   </section>
+
 {% endblock %}

@@ -2,6 +2,10 @@
 {% load static %}
 
 {% block content %}
+<div style="text-align: center; padding-bottom: 30px;">
+    <a href="{% url 'add_pokemon' %}">Add Pokemon</a>
+  </div>
+
 <section class="cards-container">
     <!-- Display Pokemon Cards -->
 {% for card in pokemoncard %}
@@ -17,7 +21,7 @@
         </div>
         <div class="card-name">
             <h2 class="sbs">{{ card.name}}</h2>
-            <h2 class="sbs" id="card-number">#0025</h2>
+            <h2 class="sbs" id="card-number">#00{{card.id}}</h2>
             <hr />
         </div>
         <div class="card-rarity">
@@ -50,12 +54,19 @@
             <th>Abilities:</th>
             <td>{{ card.abilities }}</td>
         </tr>
+      
+        
     </tbody>
     </table>
+    <div class="card-name">
+    <a href="{% url 'delete_pokemon' card.id %}">Delete</a> |
+    <a href="{% url 'edit_pokemon' card.id %}">Edit</a>
+    </div>
 <hr />
 </div>
 </div>
 </div>
 {% endfor %}
 </section>
+
 {% endblock %}
