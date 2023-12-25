@@ -1,0 +1,13 @@
+<!-- add_trainer.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>Add Collection</h2>
+  <form method="post" action="{% url 'add_collection' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add New Collection</button>
+  </form>
+  <a href="{% url 'collection-list' %}">Cancel</a>
+{% endblock %}

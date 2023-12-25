@@ -7,8 +7,8 @@ from django.urls import reverse_lazy
 import json
 from cardquest.forms import TrainerForm
 from .models import Trainer
-from projectsite.forms import TrainerForm, PokemonCardForm  
-from projectsite.forms import TrainerAddForm, PokemonAddForm
+from projectsite.forms import TrainerForm, PokemonCardForm, CollectionAddForm
+from projectsite.forms import TrainerAddForm, PokemonAddForm, CollectionAddForm
 from django.views import View
 
 
@@ -150,3 +150,35 @@ class PokemonAddView(CreateView):
             form.save()
             return redirect('pokemoncard-list') 
         return render(request, self.template_name, {'form': form})
+
+class CollectionAddView(CreateView):
+    template_name = 'add_collection.html'
+
+    def get(self, request):
+        form = CollectionAddForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = CollectionAddForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('collection-list') 
+        return render(request, self.template_name, {'form': form})
+
+class CollectionDeleteView(DeleteView):
+    model = PokemonCard
+    template_name = 'delete_collection.html'
+    success_url = reverse_lazy('collection-list')  
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+    
+class CollectionUpdateView(UpdateView):
+    model = Collection
+    form_class = CollectionAddForm
+    template_name = 'edit_collection.html'
+    success_url = reverse_lazy('collection-list')  # Redirect to the trainer list after editing
+
+    def form_valid(self, form):
+        # Additional logic if needed before saving the form
+        return super().form_valid(form)

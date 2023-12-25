@@ -10,21 +10,30 @@
           <th>Trainer Name</th>
           <th>Pokemon Card</th>
           <th>Collection Date</th>
+          <th>Actions</th>
         </tr>
         {% for collection in collections %}
           <tr>
             <td>{{ collection.trainer.name }}</td>
             <td>{{ collection.card.name }}</td>
             <td>{{ collection.collection_date }}</td>
+            <td>
+              <a href="{% url 'edit_collection' collection.id %}">Edit</a> |
+              <a href="{% url 'delete_collection' collection.id %}">Delete</a>
+        </td> 
           </tr>
         {% empty %}
           <tr>
             <td colspan="3" style="text-align: center;">
-              <p>No Collections Found</p>
+              <p>No Collections Found</p>s
             </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+
   </section>
+  <div class="addbtn" style="text-align: center; padding-bottom: 30px;">
+    <a href="{% url 'add_collection' %}">Add Collection</a>
+  </div>
 {% endblock %}
